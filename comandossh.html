@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="indicessh.html">
+    <style>
+        body{
+            background-color: aqua;
+        }
+        #uno,#dos,#tres,#cuatro,#cinco,#seis,#siete{
+            border: 1px solid black;
+            width: 400px;
+            background-color: yellowgreen;
+            font-size: 20px;
+        }
+        h1{
+    
+        }
+    </style>
+</head>
+<body>
+    
+<header>
+    <h1>CONFIGURACION DE SSH</h1>
+</header>
+
+
+<h4>CAMBIAR EL NUMERO DE PUERTO</h4>
+ <div id="uno">
+    <code>
+        #sudo nano /etc/ssh/sshd_config <br>
+         port 5000 <br>
+         #sudo systemctl restart ssh <br>
+    </code>
+ </div>
+
+
+
+
+ <h4>COMO COPIAR UN FICHERO DESDE LA MAQUINA CLIENTE AL SERVIDOR</h4>
+ <div id="dos">
+         <code>
+            #sudo scp -P5000 'nombrefiche.txt' 'root'@192.159.43.3:/home/'nombre del servidor'
+         </code>
+ </div>
+
+ <h4>COMO QUITAR EL PASSWORD DE SSH </h4>
+
+ <div id="tres">
+    <code>
+        #ssh-keygen <br> 
+        # cd .ssh <br>
+        #ssh-copy-id root@ip-servidor
+    </code>
+ </div>
+
+<h4>BLOQUEAR AL USUARIO  ROOT</h4>
+
+<div id="cuatro">
+    <code>
+        #sudo nano /etc/ssh/sshd_config <br>
+        permitlogin no  <br> 
+        #sudo systemctl restart ssh 
+    </code>
+</div>
+
+
+<h4>DENEGAR EL ACCESO A UN USUARIO </h4>
+<div id="cinco">
+    <code>
+        #sudo nano /etc/ssh/sshd_config <br>
+        DenyUsers 'usuario a denegar' <br>
+        #sudo systemctl restart ssh 
+    </code>
+</div>
+<h4>AUTORIZAR EL ACCESO A DETERMINADOS USUARIOS AL SERVIDOR SSH</h4>
+<div id="seis">
+    <code>
+        #sudo nano /etc/ssh/sshd_config <br>
+        agregamos la siguiente linea"AllowUsers usuari1" <br> 
+        #sudo systemctl restart ssh 
+    </code>
+</div>
+
+<h4>DOBLE AUTENTIFICACION EN SSH </h4>
+
+<div id="siete">
+    <code>
+        #sudo apt update <br>
+        #sudo apt install libpam-google-authenticator <br>
+        # google-authenticator  <br>
+        # sudo nano /etc/pam.d/sshd <br>
+        agregar la siguiente linea "auth required pam_google_authenticator.so" <br>
+        #sudo nano /etc/ssh/sshd_config <br>
+        agregamos la linea "ChallengeResponseAuthentication yes" <br>
+        # sudo systemctl restart ssh 
+    </code>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
