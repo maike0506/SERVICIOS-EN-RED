@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{
+        background-color: gray;
+    }
+    .uno{
+        border: 1px solid black;
+        width: 300px;
+        background-color: white;
+        padding-left: 100px;
+    }
+    .dos{
+        border: 1px solid black;
+        width: 300px;
+        background-color: white;
+        padding-left: 100px;
+    }
+    .tres{
+        border: 1px solid black;
+        width: 300px;
+        background-color: white;
+        padding-left: 100px;
+    }
+    .cuatro{
+        border: 1px solid black;
+        width: 500px;
+        background-color: white;
+        padding-left: 100px;
+    }
+    .cinco{
+        border: 1px solid black;
+        width: 300px;
+        background-color: white;
+        padding-left: 100px;
+    }
+    </style>
+</head>
+<body>
+    
+<h1>PASOS PARA INSTALAR Y CONFIGURAR UN SERVIDOR DHCP </h1>
+
+<h4>INSTALAR EL SERVIDOR DHCP</h4>
+<div class="uno">
+    <code>
+        sudo apt update <br>
+    sudo apt install isc-dhcp-server 
+     </code> <br>
+    
+</div> 
+
+
+ <h4>CONFIGURAR LA INTERFAZ DE RED EN EL SIGUIENTE ARCHIVO</h4>
+<div class="dos">
+    <code>
+        sudo nano /etc/default/isc-dhcp-server <br><br>
+        <b>buscamos la linea que dice INTERFACESv4= enpo0s8  que es por esa enp0s8 que esta conectada a la red 3</b>
+     </code>
+</div>
+
+ <h4>Configurar el archivo de configuracion del servidor DHCP</h4>
+ <div class="tres">
+    <code>
+        sudo nano /etc/dhcp/dhcpd.conf  
+      </code>
+    
+     
+ </div>
+ <b>EN ESE ARCHIVO MODIFICAMOS LA SIGUIENTE LINEA</b> <br><br> 
+ <div class="cuatro">
+    <code>
+        subnet 192.168.10.0  netmask 255.255.255.0{
+    
+            range 192.168.10.10 192.168.10.50;   === esto es el rango de direcciones ip que el servidor va asignar a los dispositivos <br>
+            option routers: 192.168.10.1;    ===== Direccion ip del routers <br>
+            option subnet-umask 255.255.255.0;  ==== mascara de red del router <br> 
+            option domain-name-servers 8.8.8.8 , 8.8.4.4 == dns de google <br>
+    
+        } 
+      </code> <br><br> 
+    
+ </div> 
+ 
+  <h4>HABILITA Y ARRANCA EL SERVIDOR DHCP</h4>
+  <div class="cinco">
+    <code>
+        sudo systemctl restart isc-dhcp-server === para arrancar el servidor <br>
+        sudo systemctl enable isc-dhcp-server  === para habilitar el servidor
+       </code>
+    
+  </div>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
