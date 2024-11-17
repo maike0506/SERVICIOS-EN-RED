@@ -18,6 +18,13 @@
         h1{
     
         }
+        .scrip{
+            border: 1px solid black;
+            width: 1000px;
+            background-color: yellowgreen;
+            font-size: 20px;
+        }
+        }
     </style>
 </head>
 <body>
@@ -99,6 +106,19 @@
     </code>
 </div>
 
+<br><br><br><br><br>
+<div class="scrip">
+    <code>
+        #!/bin/bash <br>
+
+# Abrir la primera pestaña y conectarse a la primera máquina (192.168.57.3) <br><br>
+gnome-terminal --tab -- bash -c "ssh michael@192.168.57.3; exec bash" & <br>
+
+# Abrir la segunda pestaña y conectarse a la segunda máquina (192.168.58.3) <br><br>
+gnome-terminal --tab -- bash -c "ssh michael@192.168.58.3; exec bash" <br>
+
+    </code>
+</div>
 
 
 
