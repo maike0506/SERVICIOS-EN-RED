@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "escribe tu edad por favor"
+
+read age   
+echo " esta es tu edad : $age" 
