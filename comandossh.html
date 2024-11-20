@@ -6,22 +6,28 @@
     <title>Document</title>
     <style>
         body{
-            background-color: black;
+            background-color: white;
         }
-        #uno,#dos,#tres,#cuatro,#cinco,#seis,#siete{
+        #uno,#tres,#cuatro,#cinco,#seis,#siete{
             border: 1px solid black;
             width: 700px;
-            background-color: yellowgreen;
+            background-color: grey;
+            font-size: 20px;
+        }
+        #dos{
+            border: 1px solid  black;
+            width: 1000px;
+            background-color: gray;
             font-size: 20px;
         }
         h1{
-            color: red;
+            color: black;
             font-size: 50px;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 
         }
         h4{
-            color: white;
+            color: black;
             font-size: 30px;
             font-weight: bold;
         }
@@ -31,7 +37,14 @@
             background-color: yellowgreen;
             font-size: 20px;
         }
+        .referencia{
+             border: 1px solid black;
+            width: 500 px;
+             background-color: blue;
+             color: black;
+             font-weight: bold;
         }
+        
     </style>
 </head>
 <body>
@@ -44,9 +57,9 @@
 <h4>CAMBIAR EL NUMERO DE PUERTO</h4>
  <div id="uno">
     <code>
-        #sudo nano /etc/ssh/sshd_config <br>
-         port 5000 <br>
-         #sudo systemctl restart ssh <br>
+        $ sudo nano /etc/ssh/sshd_config <br><br>
+         port 5000 <br><br>
+         $ sudo systemctl restart ssh <br>
     </code>
  </div>
 
@@ -56,7 +69,7 @@
  <h4>COMO COPIAR UN FICHERO DESDE LA MAQUINA CLIENTE AL SERVIDOR</h4>
  <div id="dos">
          <code>
-            #sudo scp -P5000 'nombrefiche.txt' 'root'@192.159.43.3:/home/'nombre del servidor'
+            $ sudo scp -P5000 'nombrefiche.txt'  'root'@192.159.43.3:/home/'nombre del servidor'
          </code>
  </div>
 
@@ -64,9 +77,9 @@
 
  <div id="tres">
     <code>
-        #ssh-keygen <br> 
-        # cd .ssh <br>
-        #ssh-copy-id root@ip-servidor
+        $ ssh-keygen <br> <br>
+        $  cd .ssh <br><br>
+        $ ssh-copy-id root@ip-servidor
     </code>
  </div>
 
@@ -74,9 +87,9 @@
 
 <div id="cuatro">
     <code>
-        #sudo nano /etc/ssh/sshd_config <br>
-        permitrootlogin no  <br> 
-        #sudo systemctl restart sshd
+        $ sudo nano /etc/ssh/sshd_config <br><br>
+        permitrootlogin no  <br> <br>
+        $ sudo systemctl restart sshd
     </code>
 </div>
 
@@ -84,17 +97,17 @@
 <h4>DENEGAR EL ACCESO A UN USUARIO </h4>
 <div id="cinco">
     <code>
-        #sudo nano /etc/ssh/sshd_config <br>
-        DenyUsers 'usuario a denegar' <br>
-        #sudo systemctl restart sshd 
+        $ sudo nano /etc/ssh/sshd_config <br><br>
+        DenyUsers 'usuario a denegar' <br><br>
+        $ sudo systemctl restart sshd 
     </code>
 </div>
 <h4>AUTORIZAR EL ACCESO A DETERMINADOS USUARIOS AL SERVIDOR SSH</h4>
 <div id="seis">
     <code>
-        #sudo nano /etc/ssh/sshd_config <br>
-        agregamos la siguiente linea"AllowUsers usuari1" <br> 
-        #sudo systemctl restart sshd 
+        $ sudo nano /etc/ssh/sshd_config <br><br>
+        agregamos la siguiente linea"AllowUsers usuar1" <br> <br>
+        $ sudo systemctl restart sshd 
     </code>
 </div>
 
@@ -103,14 +116,14 @@
 
 <div id="siete">
     <code id="sie" class="copyText">
-#sudo apt update
-#sudo apt install libpam-google-authenticator
-# google-authenticator
-# sudo nano /etc/pam.d/sshd
-agregar la siguiente linea "auth required pam_google_authenticator.so"
-#sudo nano /etc/ssh/sshd_config
-agregamos la linea "ChallengeResponseAuthentication yes"
-# sudo systemctl restart sshd
+        $ sudo apt update <br><br>
+        $ sudo apt install libpam-google-authenticator<br><br>
+        $ google-authenticator<br><br>
+        $  sudo nano /etc/pam.d/sshd<br><br>
+    #agregar la siguiente linea "auth required pam_google_authenticator.so"<br><br>
+$ sudo nano /etc/ssh/sshd_config<br><br>
+# agregamos la linea "ChallengeResponseAuthentication yes"<br><br>
+$ sudo systemctl restart sshd<br><br>
     </code>
     <button onclick="copyText()">copiar</button>
 </div>
@@ -121,7 +134,7 @@ agregamos la linea "ChallengeResponseAuthentication yes"
         #!/bin/bash <br>
 
 # Abrir la primera pestaña y conectarse a la primera máquina (192.168.57.3) <br><br>
-gnome-terminal --tab -- bash -c "ssh michael@192.168.57.3; exec bash" & <br>
+gnome-terminal --tab -- bash -c "ssh michael@192.168.57.3; exec bash" & <br><br>
 
 # Abrir la segunda pestaña y conectarse a la segunda máquina (192.168.58.3) <br><br>
 gnome-terminal --tab -- bash -c "ssh michael@192.168.58.3; exec bash" <br>
@@ -129,7 +142,7 @@ gnome-terminal --tab -- bash -c "ssh michael@192.168.58.3; exec bash" <br>
     </code>
 </div>
 
-<a href="dhcp.redes.html">siguiente hoja de html </a>
+<a href="dhcp.redes.html" class="referencia">siguiente hoja de html </a>
 
 </body>
 </html>
