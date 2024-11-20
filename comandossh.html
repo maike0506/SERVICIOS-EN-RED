@@ -101,17 +101,19 @@
 
 <h4>DOBLE AUTENTIFICACION EN SSH </h4>
 
+
 <div id="siete">
-    <code>
-        #sudo apt update <br>
-        #sudo apt install libpam-google-authenticator <br>
-        # google-authenticator  <br>
-        # sudo nano /etc/pam.d/sshd <br>
-        agregar la siguiente linea "auth required pam_google_authenticator.so" <br>
-        #sudo nano /etc/ssh/sshd_config <br>
-        agregamos la linea "ChallengeResponseAuthentication yes" <br>
-        # sudo systemctl restart sshd 
+    <code id="sie" class="copyText">
+#sudo apt update
+#sudo apt install libpam-google-authenticator
+# google-authenticator
+# sudo nano /etc/pam.d/sshd
+agregar la siguiente linea "auth required pam_google_authenticator.so"
+#sudo nano /etc/ssh/sshd_config
+agregamos la linea "ChallengeResponseAuthentication yes"
+# sudo systemctl restart sshd
     </code>
+    <button onclick="copyText()">copiar</button>
 </div>
 
 <br><br><br><br><br>
@@ -130,46 +132,23 @@ gnome-terminal --tab -- bash -c "ssh michael@192.168.58.3; exec bash" <br>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
+
+
+<script>
+    function copyText() {
+      const codeElement = document.getElementById("sie");
+      const text = codeElement.textContent || codeElement.innerText;
+  
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          alert("Texto copiado al portapapeles.");
+        })
+        .catch(err => {
+          alert("Error al copiar el texto: " + err);
+        });
+    }
+  </script>
+
+
