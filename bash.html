@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<header>
+    <h1>APRENDIENDO BIN/BASH</h1>
+</header>
+
+<section class="uno">
+    <h4>COMO SE EMPIEZA Y UN script</h4> <br>
+    <code>
+        #!/bin/bash 
+    </code>
+   <br><br>
+    <h4>MOSTRAR UNA SALIDA DE TEXTO CON CAT </h4> <br>
+    <code>
+        cat << myText br
+        hola como estas  
+    </code>
+    <details>
+        <p>lo que hara dicho codigo nos mostrara en pantalla hola como estas si ejecutamos el arhivo donde hayamos escrito dicho texto tambien se puedo utilizar el echo </p>
+    </details> <br>
+    <h4>comando read de bin/bash</h4>
+     <code>
+        echo " por favor introduzca su edad " <br>
+       read    <br>
+       echo " esta es tu edad : $age"
+     </code>
+     <details>
+        <p>nos permite guardar lo que el usuario tipe en la terminal es decir lo que el usuario escriba " el signo $ ponemos para que lea el dato que puso el usuario "   </p>
+     </details> <br>
+
+  <!-- COMO FUNCIONA LAS CONDICIONALES EN /BIN/BASH  -->
+
+    <h4> COMO FUNCIONA LAS CONDICIONES EN /BIN/BASH</h4>
+        <code>
+             age= 10  <br>
+             if{ $age -eq 10} <br>  
+            then  <br>
+            echo " el numero es igual " <br>
+             <br>
+             elif (( $age >= 17 )) <br>
+              then  <br>
+              echo " casi eres un adulto" <br>
+              <!-- el elif se utiliza para poner otra condicion -->
+            else
+             echo " el numero no es igual "
+             fi 
+             <!--  PODEMOS HACER QUE LOS OPERADORES SE AN LO MISMO QUE LOS QUE UTILIZAMOS PROGRAMANDO COMO EL SIGNO DE = >>  + -  PUES AL TENEMOS QUE HACER LO SIGUIENTE
+               
+                  if { (($ age = 10 ))  } basicamente le ponemos dos parentesis -->
+        </code>
+        <!--  buscar todos los operadores de las codincionales  -->
+  <details>
+    <p>primeramente en el codigo vemos que se delcaro la variabled e age  y se utiliza la condicional if  y dentro de este   ponemos lo que queremos que compruebe " then" se utiliza para decir que queremos que nos muestre si se cumple dicha condicion  " para interpetrar una variable  tenemos que poner el signo de dolar al principi" </p>
+  </details>
+
+  <h4> OPERADORES LOGICOS </h4> <br>
+     <code>
+        age= 10 
+
+        <!--  18 menor que 40  -->
+        if{ $age -gt  18 } &&  {$age -lt 40} <br>
+        <!--  aqui el operador  que estamos utilizando es &&  que  en palabra seria como decir "y" este operador espera que las dos condiciones sean verdadeeras para ser ejecutadas
+            tambien tenemos otro operador que es el "or" ||" ese es su signo  y en palabra seria decir como "o"-->
+            
+            <!--  tenemos el siguiente caso de como funciona para entenderlo mejor 
+                    age =17
+                        if {{ $age -gt 18 || $age -lt 40 }}
+                        then 
+                         echo " edad valida"
+                          else
+                          echo " edad no vvalida " 
+                          fi 
+                    " LO QUE HACE BASICAMENTE ES  PREGUNTA 17 ES MENOR QUE 18 LA RESPUESTA ES FALSE  LUEGO VA AL 40  Y EL SCRIPT 17 ES MENOR QUE 40 VERDADERO CUAL QUIERA QUE TE DE TRUE ES SUFICIENTE PARA QUE TE MUESTRA UNA RESPUESTA VALIDA  "-->
+        then <br>
+        echo "edad valida" <br>
+        else  <br>
+         echo "edad no valida " <br>
+         fi <br> 
+      </code>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+
