@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    body{
+         background-color: black;
+         color: yellow;
+    }
+    h1{
+        color: red;
+    }
+    h4{
+        color: yellow;
+    }
+
+    code{
+         position: relative;
+        border: 1px solid white ;
+        color: white;
+        width: 600px;
+        height: 400px;
+        
+    }
+    .uno {
+         color: yellow;
+    }
+</style>
+</head>
+<body>
+    
+
+<h1>INSTALACION Y CONFIGURACION DE SERVIDOR RELAY</h1> <br>
+
+<h4>INSTALACION DE SERVIDOR RELAY</h4> <br><br>
+ 
+ <code>
+     sudo apt update
+ </code> <br>
+  <code>
+     sudo apt install isc-dhcp-relay 
+  </code>  <br><br>
+
+  <p class="uno"> durante la instalcion configuraremos  la ip del servidor que es lo primero que te aparece</p> <br><br>
+    
+  <code>
+      ip de nuestro servidor dhcp >
+  </code> <br><br>
+
+  <p class="uno"> despues de indicarle la ip de nuestro servidor dhcp  le indicamos la enp0s de entrada que por donde va escuchar a los equipos cliente y la salida que es por donde escuchara al servidor dhcp </p> <br>
+   
+    <code>
+         enp0s9 enp0s8      #por la enp0s9 escuchara a los equipos clientes y por la enp0s8 escuchara al servidor dhcp 
+    </code> <br> 
+
+  <p> en este paso le indicamos que no  </p>
+
+
+<h4>FICHERO DE CONFIGURACION DE INTERFAZ DEL SERVIDOR RELAY</h4>
+  
+<code>
+     sudo nano /etc/dhcp/isc-dhcp-relay  
+</code> <br>
+ <details class="uno">
+    <p> <b>aqui aparecera lo que hemos configurado en el proceso de instalacion </b></p> <br>
+ </details>
+
+
+ 
+<h4>HACESMOS UN RESTART AL SERVIDOR RELAY Y EL STATUS</h4> <br><br>
+<code>
+    sudo systemctl restart isc-dhcp-relay
+    sudo systemctl status  isc-dhcp-relay
+</code>
+
+<details class="uno">
+    <summary>detalles sobre el servidor relay</summary>
+     <p>basicamente lo que hace el servidor relay es indicarle al servidor dhcp las redes que no conoce </p>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
