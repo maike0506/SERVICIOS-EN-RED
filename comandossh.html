@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,16 +7,24 @@
     <link rel="stylesheet" href="indicessh.html">
     <style>
         body{
-            background-color: aqua;
+            background-color: black;
         }
         #uno,#dos,#tres,#cuatro,#cinco,#seis,#siete{
             border: 1px solid black;
-            width: 400px;
+            width: 700px;
             background-color: yellowgreen;
             font-size: 20px;
         }
         h1{
-    
+            color: red;
+            font-size: 50px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+        }
+        h4{
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
         }
         .scrip{
             border: 1px solid black;
@@ -68,8 +76,8 @@
 <div id="cuatro">
     <code>
         #sudo nano /etc/ssh/sshd_config <br>
-        permitlogin no  <br> 
-        #sudo systemctl restart ssh 
+        permitrootlogin no  <br> 
+        #sudo systemctl restart sshd
     </code>
 </div>
 
@@ -79,7 +87,7 @@
     <code>
         #sudo nano /etc/ssh/sshd_config <br>
         DenyUsers 'usuario a denegar' <br>
-        #sudo systemctl restart ssh 
+        #sudo systemctl restart sshd 
     </code>
 </div>
 <h4>AUTORIZAR EL ACCESO A DETERMINADOS USUARIOS AL SERVIDOR SSH</h4>
@@ -87,7 +95,7 @@
     <code>
         #sudo nano /etc/ssh/sshd_config <br>
         agregamos la siguiente linea"AllowUsers usuari1" <br> 
-        #sudo systemctl restart ssh 
+        #sudo systemctl restart sshd 
     </code>
 </div>
 
@@ -102,7 +110,7 @@
         agregar la siguiente linea "auth required pam_google_authenticator.so" <br>
         #sudo nano /etc/ssh/sshd_config <br>
         agregamos la linea "ChallengeResponseAuthentication yes" <br>
-        # sudo systemctl restart ssh 
+        # sudo systemctl restart sshd 
     </code>
 </div>
 
