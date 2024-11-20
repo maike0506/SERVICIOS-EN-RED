@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
     body{
-        background-color: gray;
+        background-color: black;
     }
     .uno{
         border: 1px solid black;
@@ -38,6 +38,18 @@
         background-color: white;
         padding-left: 100px;
     }
+
+    h1{
+        color:yellow;
+        font-weight: bold;
+    }
+    h4{
+        color: yellow;
+        font-weight: bold;
+    }
+    .mod{
+         color: yellow;
+    }
     </style>
 </head>
 <body>
@@ -48,7 +60,7 @@
 <div class="uno">
     <code>
         sudo apt update <br>
-    sudo apt install isc-dhcp-server 
+    sudo apt install isc-dhcp-server  <br>
      </code> <br>
     
 </div> 
@@ -58,56 +70,65 @@
 <div class="dos">
     <code>
         sudo nano /etc/default/isc-dhcp-server <br><br>
-        <b>buscamos la linea que dice INTERFACESv4= enpo0s8  que es por esa enp0s8 que esta conectada a la red 3</b>
+        sudo systemctl restart isc-dhcp-server
      </code>
-</div>
+    </div> <br><br>
+    <details class="mod">
+        <summary class="mod">modificar:</summary>
+        <b>en este fichero le indicamos por interfaces va escuchar nuestro servidor  en mi caso le indico que escuchara por la "enp0s8"</b>
+    </details> <br><br>
 
  <h4>Configurar el archivo de configuracion del servidor DHCP</h4>
  <div class="tres">
     <code>
         sudo nano /etc/dhcp/dhcpd.conf  
       </code>
+    </div>
+  <details class="mod">
+     <summary>modificamos las siguientes lineas</summary>
+     <code class="code">
+         subnet 192.168.10.0  netmask 255.255.255.0{  === aqui le indicamos la red a la que le vamos a asignar las direcciones ip mediante dhcp <br>
+             range 192.168.10.10 192.168.10.50;   === esto es el rango de direcciones ip que el servidor va asignar a los dispositivos <br>
+             option routers: 192.168.10.1;    ===== Direccion ip del routers seria el gateway<br>
+             option subnet-umask 255.255.255.0;  ==== mascara de red del router <br> 
+             option domain-name-servers 8.8.8.8 , 8.8.4.4 == dns de google <br>
+             
+         } 
+       </code> <br><br> 
+
+      <p>PARA ASIGNAR UNA IP FIJA A UN DISPOSITIVO SE MODIFICA LA SIGUIENTE LINEA EN EL MISMO FICHERO</p>
+
+      <code class="codeuno">
+            host serveweb {
+                hardware ethernet  < mac equipo client>  <br>
+                fixed-address < direccion ip >  =====   la direccion ip fija que le asignesmos al equipo no tiene que estar en el rango de direcciones que pusimos anteriormente en el range <br>
+            }
+      </code>
+  </details>
     
-     
- </div>
- <b>EN ESE ARCHIVO MODIFICAMOS LA SIGUIENTE LINEA</b> <br><br> 
- <div class="cuatro">
-    <code>
-        subnet 192.168.10.0  netmask 255.255.255.0{
-    
-            range 192.168.10.10 192.168.10.50;   === esto es el rango de direcciones ip que el servidor va asignar a los dispositivos <br>
-            option routers: 192.168.10.1;    ===== Direccion ip del routers <br>
-            option subnet-umask 255.255.255.0;  ==== mascara de red del router <br> 
-            option domain-name-servers 8.8.8.8 , 8.8.4.4 == dns de google <br>
-    
-        } 
-      </code> <br><br> 
-    
- </div> 
- 
+
   <h4>HABILITA Y ARRANCA EL SERVIDOR DHCP</h4>
   <div class="cinco">
     <code>
         sudo systemctl restart isc-dhcp-server === para arrancar el servidor <br>
-        sudo systemctl enable isc-dhcp-server  === para habilitar el servidor
+        sudo systemctl enable isc-dhcp-server  === para habilitar el servidor <br>
+        sudo systemctl status isc-dhcp-server === para ver el estado del servidor <br>
        </code>
-    
-  </div>
-   
- <div class="nueve">
-    sudo journalctl -xeu isc-dhcp-server -n 100 
+</div>
+ <h4>COMANDOS PARA VERIFICAR ERRORES EN NUESTRO FICHEROS DE CONFIGURACION </h4>  
+ <div class="tres">
+    sudo journalctl -xeu isc-dhcp-server -n 100  
     
  </div>
 
-
-
-
-
-
-
-
-
-
+ <h4> PROBLEMAS ENCONTRADOS EN LAS PRACTICAS </h4>
+  
+ <details class="mod">
+    <summary>desplegar</summary>
+     - primer problema encontrado fue que al equipo cliente no le asignava una ip fija  por que el servidor relay no estaba activado <br><br>
+     - segundo problema encontrado fue que no asignaba direcciones ip  la solucion a este proble fue enrutar todas las redes que teniamos /// no asignaba ip por que la red no estaba enrutada
+ </details>
 
 </body>
 </html>
+
