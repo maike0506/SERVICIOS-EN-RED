@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1>INSTALACION Y CONFIGURACION DEL SERVIDOR DNS</h1>
+
+<header>
+     <p> primero configuraremos el servidor dns maestro</p>
+</header>
+
+<main>
+ 
+     <h4>1.PASO INSTALAR EL PAQUETE DEL DEMONIO DE DNS QUE ES EL BIND9</h4><br><br>
+     <code class="uno">
+               sudo apt update <br>
+                sudo apt install bind9 bind9-utils <br>    
+     </code><br>
+
+    <h4> 2.PASO CONFIGURAR EL FICHERO  /etc/bind/named.conf.options " EN ESTE FICHERO CONFIGURAREMOS LOS REENVIADORES EN UN PRINCIPIO"</h4> <br>
+    <code class="dos">
+            $sudo nano /etc/bind/name.conf.options <br>
+    </code> <br>
+  
+     <p> una vez dentro del fichero tenemos que modificar las siguientes lineas </p> <br>
+      
+      <code>
+        forwarders { <br>
+            8.8.8.8; <br>
+            1.1.1.1; <br>
+     };
+      </code> <br>
+
+      <p> <b> forwarders: </b>son los reenviadores   del dns aqui definimos a que dns se enviaran las consultas  que nuestro servidor dns no sepa contestar por ejemplo  www.gogle.com que no esta definido en nuestro servidor dns asi que hara la consulta al dns de google que es el 8.8.8.8  </p> <br>
+
+      <p> continuando en el mismo fichero mas anajo  agregamos las siguientes lineas que van dirijido con nuestro servidor (exclavo)</p>
+<code>
+    dnssec-validation no; <br>
+
+    listen-on-v6 { any; }; <br>
+    recursion yes; <br>
+    allow-recursion { any;}; <br>
+    allow-query { any;}; <br>
+    allow-query-cache { any;}; <br>
+    listen-on { any;}; <br>
+    notify yes; <br>
+
+
+
+
+  };
+</code> <br>
+
+<ul>
+    <li><b>dnssec-validation</b>Desactiva la validación DNSSEC</li> <br>
+    <li><b>listen-on-v6{ any; };:</b> Escucha en todas las direcciones IPv6.</li> <br>
+    <li><b>recursion yes </b>Habilita la recursión.</li> <br>
+    <li><b>allow-recursion { any; };:</b>Permite recursión desde cualquier IP.</li> <br>
+    <li><b>allow-query { any; };:</b>Permite consultas desde cualquier IP.</li> <br>
+    <li><b>allow-query-cache { any; };:</b> Permite acceso a la caché desde cualquier IP.</li> <br>
+    <li><b>listen-on { any; };:</b> Escucha en todas las interfaces de red.</li> <br>
+    <li><b>notify yes;:</b> Habilita notificaciones a otros servidores cuando se actualiza una zona.</li> <br>
+</ul>
+
+  <h4>SIGUIENTE PASO NOS DIRIJIMOS AL FICHERO <code>named.conf.local</code></h4> <br>
+   
+  <p> <b>AGREGAMOS LAS SIGUIENTES LINEAS EN LA PARTE DE ABAJO las siguientes lineas </b></p> <br>
+   <code>
+         zone "ecologista.home.arpa" {
+            type master; <br>
+             file "/etc/bind/zones/db.ecologista.home.arpa"; <br>
+             allow-transfer { 10.0.1.11 ; }; <br>
+         } ; <br>
+
+        <br><br>
+        zone " 10.0.10.in-addr-arpa" { <br>
+            type master ; <br>
+            file " /etc/bind/zonas/db.1.0.10"; <br>
+             allow-transfer { 10.0.1.11 ;};  <br>
+        }; <br>
+   </code> <br>
+    <p> <b>  en este fichero estamos definiendo las zonas y tambien indicando el fichero y el directorio donde estara la configuracion de dichas zonas </b> </p>
+     <ul>
+        <li> <b> allow-transfer { ; };  </b> aqui le estamos indicando donde aqui le estamos indicando la transferencia de zonas de nuestro  servidor dns maestro a nuestro servidor dns secundario o exclavo </li> <br>
+
+     </ul> <br>
+      <h4> SIGUIENTE PASO CREAR EL DIRECTORIO <b>zonas </b> y los archivos que indicamos anteriormente en el fichero <b>named.conf.local </b></h4>
+           
+           <ol>
+                <li> <b>Creamos el directorio zonas </b></li> <br>
+                 <code>
+                   sudo mkdir zonas 
+                 </code> <br>
+                 <li> copiamos el fichero db.local a nuestro fichero que lo vamos a crear con el nombre que pusimos en fichero <b>named.conf.options </b></li> <br>
+                   <code>
+                       sudo cp /etc/bind/db.local  /etc/bind/zonas/db.ecologista.home.arpa 
+                   </code> <br>
+                     <code>
+                       sudo cp /etc/bind/db.0       /etc/bind/zonas/db.1.0.10 
+                     </code> <br>
+                      <p> esto es para la forma recursiva </p> <br>
+                  
+           </ol>   <br><br>
+           
+           <h4> Una vez creado los dos archivos nos dirimos a configurarlos primero empezamos por el fichero <b>db.ecologist.home.arpa </b></h4> <br>
+
+             
+            <h4> una vez configurado el servidor maestro nos dirijimos al servidor exclavo al fichero de configuracion <b> named.conf.options </b></h4> <br>
+            <code>
+                  forwarders { <br>
+                     8.8.8.8;  <br>
+                     1.1.1.1;  <br>
+                  }; <br>
+
+                  dnsser-validation no ;  <br>
+                   listen-on { any;}; <br>
+                  listen-on-v6 { any ;}; <br>
+                  notify yes ; <br>
+                };
+            </code> <br><br>
+
+            <h4> En el mismo servidor exclovo nos dirijimos al fichero named.conf.local </h4><br>
+          
+              <code>
+                  zone "ecologista.home.arpa"{ <br>
+                      typeslave; <br>
+                        file " db.ecologista.home.arpa";<br>
+                         master { 10.0.1.10 ; }; <br>
+                          allow-notify { 10.0.1.10}   <br>
+                  } ; <br>
+
+                  zone "1.010.in-addre.arpa "{ <br>
+                    type slave ; <br>
+                  file " db.1.0.10" <br>
+                     masters {  10.0.1.10 ;}; <br>
+                      allow-notify { 10.0.1.10 ;} ; <br>
+                  }; 
+              </code>          
+          
+          </main>
